@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# دانلود آخرین دیتابیس آدرس‌های IP از APNIC
+curl -o apnic.db https://ftp.apnic.net/apnic/stats/apnic/delegated-apnic-latest
+
+# استخراج IPv4 و IPv6 کشورهای آسیا
+echo "IPv4 و IPv6 آدرس های کشورهای قاره آسیا:"
+
+# فیلتر کردن آدرس‌های IPv4
+echo "IPv4 آدرس ها:"
+grep 'apnic|[A-Z][A-Z]|ipv4|' apnic.db | awk -F '|' '{print $4"/"$5}'
+
+# فیلتر کردن آدرس‌های IPv6
+echo "IPv6 آدرس ها:"
+grep 'apnic|[A-Z][A-Z]|ipv6|' apnic.db | awk -F '|' '{print $4"/"$5}'
